@@ -18,8 +18,6 @@ const App = () => {
   });
 
   const themeToggler = () => {
-    // theme === "light" ? setTheme("dark") : setTheme("light");
-
     let toggle = document.querySelector(".theme-toggle")
     if (theme === "light") {
       toggle.src = icons.sun
