@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/weather-app-react/static/js/main.c8844b2a.js",
+    "static/media/rainchance.svg": "/weather-app-react/static/media/rainchance.8710986a09e03b1cf00af380ba064ecd.svg",
+    "static/media/sun.svg": "/weather-app-react/static/media/sun.26b72ea12924cdb7dacf9eccfef63197.svg",
+    "static/media/windspeed.svg": "/weather-app-react/static/media/windspeed.ad7958dcee1b6b8e1590bedf10f27c52.svg",
+    "static/media/cloudiness.svg": "/weather-app-react/static/media/cloudiness.d2358e0d82897150d45c37eb759539eb.svg",
+    "static/media/uv-index.svg": "/weather-app-react/static/media/uv-index.31808f39093944b17e6a8e26252cea64.svg",
+    "static/media/moon.svg": "/weather-app-react/static/media/moon.017a31887e752bc781d5ef43e8f74962.svg",
+    "index.html": "/weather-app-react/index.html",
+    "static/media/winddirection.svg": "/weather-app-react/static/media/winddirection.4bdfe82ccf94abe753b2cf472f19a56d.svg",
+    "main.c8844b2a.js.map": "/weather-app-react/static/js/main.c8844b2a.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.c8844b2a.js"
+  ]
+}
