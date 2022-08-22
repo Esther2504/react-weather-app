@@ -171,7 +171,9 @@ margin-left: 0.5rem;
   position: absolute;
   width: 100%;
   height: 100%;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transform: rotateX(0deg);
 }
 
 .flip-card-front {
