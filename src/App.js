@@ -54,10 +54,20 @@ const App = () => {
 
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=minutely,hourly&lang=nl&appid=${process.env.REACT_APP_API_KEY}`)
-      .then(res => res.json())
+    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/250575?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl`)
+
+      .then(res => {
+        if (res.ok) {
+        return res.json();
+        }
+        throw new Error();
+  })
       .then(weatherdata => {
         setData(weatherdata)
+        console.log(weatherdata)
+      })
+      .catch((error) => {
+        console.log(error)
       });
   }, [location])
 
