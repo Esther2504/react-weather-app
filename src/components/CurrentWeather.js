@@ -3,24 +3,24 @@ import styled from 'styled-components';
 
 export default function CurrentWeather({ location, data }) {
   // De huidige datum van de gezochte stad weergeven
-  let currentDate = (new Date(((data.current.dt - 7200) + data.timezone_offset) * 1000)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' });
-  let currentDay = (new Date(((data.current.dt - 7200) + data.timezone_offset) * 1000)).toLocaleDateString('nl-NL', { weekday: 'long' })
+  // let currentDate = (new Date(((data.current.dt - 7200) + data.timezone_offset) * 1000)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' });
+  // let currentDay = (new Date(((data.current.dt - 7200) + data.timezone_offset) * 1000)).toLocaleDateString('nl-NL', { weekday: 'long' })
 
   // Als de Nederlandse naam van de stad undefined is, wordt de Engelse naam gebruikt
-  let city = location.nlcity
-  if (location.nlcity === undefined) {
-    city = location.city
-  }
+  // let city = location.nlcity
+  // if (location.nlcity === undefined) {
+  //   city = location.city
+  // }
 
   return (
     <>
       <CityDate>   
-        <p className="city">{city}, {location.country}</p>
-        <p className='date'>{currentDay + ", " + currentDate}</p>
+        {/* <p className="city">{city}, {location.country}</p>
+        <p className='date'>{currentDay + ", " + currentDate}</p> */}
       </CityDate>
       <Weather>
-        <img alt={data.current.weather[0].description} src={`icons/${data.current.weather[0].icon}.svg`}></img>
-        <h1>{Math.round((data.current.temp - 273.15) * 10) / 10}°C</h1>
+        <img alt={''} src={''}></img>
+        <h1>{data.Temperature.Metric.Value}°C</h1>
       </Weather>
     </>
   )

@@ -9,6 +9,7 @@ import icons from './assets/icons';
 const App = () => {
   const [theme, setTheme] = useState("light");
   const [data, setData] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState()
   const [city, setCity] = useState('Utrecht');
   const [location, setLocation] = useState({
     lat: "52.080985600000005",
@@ -71,6 +72,23 @@ const App = () => {
       });
   }, [location])
 
+  useEffect(() => {
+    fetch(`http://dataservice.accuweather.com/currentconditions/v1/250575?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
+    .then(res => {
+      if (res.ok) {
+      return res.json();
+      }
+      throw new Error();
+    })
+    .then(data => {
+      setCurrentWeather(data[0])
+      console.log(data)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+}, [location])
+
   // Het klikken van de enter key gelijk zetten aan klikken zoekbutton
   useEffect(() => {
     document.querySelector(".input").addEventListener("keyup", function (event) {
@@ -91,7 +109,7 @@ const App = () => {
         </InputWrapper>
         {data ? (
           <>
-            {/* <WeatherWrapper><CurrentWeather data={data} location={location} /></WeatherWrapper> */}
+            <WeatherWrapper><CurrentWeather data={currentWeather} location={location} /></WeatherWrapper>
             <ForecastWrapper><WeatherForecast data={data} /></ForecastWrapper>
           </>
         )
