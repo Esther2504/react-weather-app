@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 export default function CurrentWeather({ location, data }) {
   // De huidige datum van de gezochte stad weergeven
-  // let currentDate = (new Date(((data.current.dt - 7200) + data.timezone_offset) * 1000)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric' });
-  // let currentDay = (new Date(((data.current.dt - 7200) + data.timezone_offset) * 1000)).toLocaleDateString('nl-NL', { weekday: 'long' })
+  let currentDate = (new Date(data?.LocalObservationDateTime)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
   // Als de Nederlandse naam van de stad undefined is, wordt de Engelse naam gebruikt
   // let city = location.nlcity
@@ -15,11 +14,11 @@ export default function CurrentWeather({ location, data }) {
   return (
     <>
       <CityDate>   
-        {/* <p className="city">{city}, {location.country}</p>
-        <p className='date'>{currentDay + ", " + currentDate}</p> */}
+        {/* <p className="city">{city}, {location.country}</p> */}
+        <p className='date'>{currentDate}</p>
       </CityDate>
       <Weather>
-        <img alt={''} src={''}></img>
+        <img alt={'test'} src={`http://localhost:3000/react-weather-app/icons/${data.WeatherIcon}.svg`}></img>
         <h1>{data.Temperature.Metric.Value}°C</h1>
       </Weather>
     </>
