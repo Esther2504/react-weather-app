@@ -18,8 +18,8 @@ export default function CurrentWeather({ location, data }) {
         <p className='date'>{currentDate}</p>
       </CityDate>
       <Weather>
-        <img alt={'test'} src={`http://localhost:3000/react-weather-app/icons/${data.WeatherIcon}.svg`}></img>
-        <h1>{data.Temperature.Metric.Value}°C</h1>
+        <img alt={data?.WeatherText} src={`http://localhost:3000/react-weather-app/icons/${data?.WeatherIcon}.svg`}></img>
+        <h1>{data?.Temperature?.Metric?.Value}°C</h1>
       </Weather>
     </>
   )

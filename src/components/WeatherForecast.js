@@ -43,8 +43,8 @@ display: flex;
 margin-left: 0.5rem;
 
 .flip-card {
-  height: 9rem;
-  width: 7rem;
+  height: 9.5rem;
+  width: 7.5rem;
   margin: 0 0.9rem;
 
   img {
@@ -54,7 +54,6 @@ margin-left: 0.5rem;
 
 .flip-card-inner {
   position: relative;
-  width: 100%;
   height: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;

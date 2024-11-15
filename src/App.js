@@ -200,7 +200,7 @@ max-width: 100%;
 
 const WeatherWrapper = styled.div`
   display: flex;
-  width: 45rem;
+  width: 48rem;
   max-width: 100%;
   height: 15rem;
   max-height: 100%;
@@ -224,8 +224,8 @@ const WeatherWrapper = styled.div`
 
 const ForecastWrapper = styled.div`
   display: flex;
-  width: 45rem;
-  height: 10rem;
+  width: 48rem;
+  height: 11rem;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   padding: 1rem;
