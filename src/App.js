@@ -11,12 +11,7 @@ const App = () => {
   const [data, setData] = useState(null);
   const [currentWeather, setCurrentWeather] = useState()
   const [city, setCity] = useState('Utrecht');
-  const [location, setLocation] = useState({
-    lat: "52.080985600000005",
-    lon: "5.12768396945229",
-    city: "Utrecht",
-    country: "NL"
-  });
+  const [location, setLocation] = useState('250575');
 
   const themeToggler = () => {
     let toggle = document.querySelector(".theme-toggle")
@@ -30,32 +25,32 @@ const App = () => {
   };
 
   // Coördinaten en locatieinfo ophalen op basis van stad
-  useEffect(() => {
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_API_KEY}`)
-      .then(res => res.json())
-      .then(locationdata => {
-        if (locationdata[0].local_names) {
-          return setLocation({
-            lat: locationdata[0].lat,
-            lon: locationdata[0].lon,
-            city: locationdata[0].name,
-            nlcity: locationdata[0].local_names.nl,
-            country: locationdata[0].country
-          })
-        } else {
-          return setLocation({
-            lat: locationdata[0].lat,
-            lon: locationdata[0].lon,
-            city: locationdata[0].name,
-            country: locationdata[0].country
-          })
-        }
-      });
-  }, [city])
+  // useEffect(() => {
+  //   fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_API_KEY}`)
+  //     .then(res => res.json())
+  //     .then(locationdata => {
+  //       if (locationdata[0].local_names) {
+  //         return setLocation({
+  //           lat: locationdata[0].lat,
+  //           lon: locationdata[0].lon,
+  //           city: locationdata[0].name,
+  //           nlcity: locationdata[0].local_names.nl,
+  //           country: locationdata[0].country
+  //         })
+  //       } else {
+  //         return setLocation({
+  //           lat: locationdata[0].lat,
+  //           lon: locationdata[0].lon,
+  //           city: locationdata[0].name,
+  //           country: locationdata[0].country
+  //         })
+  //       }
+  //     });
+  // }, [city])
 
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/250575?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
+    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${location}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
 
       .then(res => {
         if (res.ok) {
@@ -73,7 +68,12 @@ const App = () => {
   }, [location])
 
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/currentconditions/v1/250575?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
+    console.log(location)
+  }, [])
+
+
+  useEffect(() => {
+    fetch(`http://dataservice.accuweather.com/currentconditions/v1/${location}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
     .then(res => {
       if (res.ok) {
       return res.json();
@@ -105,7 +105,7 @@ const App = () => {
       <Wrapper>
       <img className="theme-toggle" onClick={() => themeToggler()} src={icons.moon}></img>
         <InputWrapper>
-          <InputBar setCity={setCity} />
+          <InputBar setCity={setCity} setLocation={setLocation} />
         </InputWrapper>
         {data ? (
           <>
