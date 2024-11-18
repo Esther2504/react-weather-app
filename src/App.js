@@ -48,9 +48,15 @@ const App = () => {
   //     });
   // }, [city])
 
+  // useEffect(() => {
+  //   if (!location) {
+  //     location.Key = '250575'
+  //   }
+  //   }, [])
+
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${location}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
+    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
 
       .then(res => {
         if (res.ok) {
@@ -73,7 +79,7 @@ const App = () => {
 
 
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/currentconditions/v1/${location}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
+    fetch(`http://dataservice.accuweather.com/currentconditions/v1/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
     .then(res => {
       if (res.ok) {
       return res.json();
@@ -105,7 +111,7 @@ const App = () => {
       <Wrapper>
       <img className="theme-toggle" onClick={() => themeToggler()} src={icons.moon}></img>
         <InputWrapper>
-          <InputBar setCity={setCity} setLocation={setLocation} />
+          <InputBar setCity={setCity} location={location} setLocation={setLocation} />
         </InputWrapper>
         {data ? (
           <>
@@ -142,6 +148,7 @@ overflow: hidden;
     position: absolute;
     top: 0.2rem;
     left: 0.2rem;
+    cursor: pointer;
   }
 `
 

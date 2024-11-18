@@ -2,19 +2,12 @@ import React from 'react'
 import styled from 'styled-components';
 
 export default function CurrentWeather({ location, data }) {
-  // De huidige datum van de gezochte stad weergeven
   let currentDate = (new Date(data?.LocalObservationDateTime)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
-
-  // Als de Nederlandse naam van de stad undefined is, wordt de Engelse naam gebruikt
-  // let city = location.nlcity
-  // if (location.nlcity === undefined) {
-  //   city = location.city
-  // }
 
   return (
     <>
       <CityDate>   
-        {/* <p className="city">{city}, {location.country}</p> */}
+        <p className="city">{location?.LocalizedName}, {location?.Country?.LocalizedName}</p>
         <p className='date'>{currentDate}</p>
       </CityDate>
       <Weather>
