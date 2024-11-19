@@ -32,7 +32,7 @@ const App = () => {
 
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
+    fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
 
       .then(res => {
         if (res.ok) {
@@ -55,7 +55,7 @@ const App = () => {
 
 
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/currentconditions/v1/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
+    fetch(`https://dataservice.accuweather.com/currentconditions/v1/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
     .then(res => {
       if (res.ok) {
       return res.json();

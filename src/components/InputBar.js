@@ -20,7 +20,7 @@ useEffect(() => {
 
 
 function getCurrentLocation(coordinates) {
-  fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
+  fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
   .then(res => res.json())
   .then(data => {
     console.log(data)
@@ -30,7 +30,7 @@ function getCurrentLocation(coordinates) {
 
 
   useEffect(() => {
-    fetch(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?q=${searchinput}&language=nl-nl&apikey=${process.env.REACT_APP_API_KEYACCU}`)
+    fetch(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?q=${searchinput}&language=nl-nl&apikey=${process.env.REACT_APP_API_KEYACCU}`)
       .then(res => res.json())
       .then(data => {
         console.log(data)
