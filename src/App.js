@@ -30,36 +30,6 @@ const App = () => {
     }
   };
 
-  // Coördinaten en locatieinfo ophalen op basis van stad
-  // useEffect(() => {
-  //   fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_API_KEY}`)
-  //     .then(res => res.json())
-  //     .then(locationdata => {
-  //       if (locationdata[0].local_names) {
-  //         return setLocation({
-  //           lat: locationdata[0].lat,
-  //           lon: locationdata[0].lon,
-  //           city: locationdata[0].name,
-  //           nlcity: locationdata[0].local_names.nl,
-  //           country: locationdata[0].country
-  //         })
-  //       } else {
-  //         return setLocation({
-  //           lat: locationdata[0].lat,
-  //           lon: locationdata[0].lon,
-  //           city: locationdata[0].name,
-  //           country: locationdata[0].country
-  //         })
-  //       }
-  //     });
-  // }, [city])
-
-  // useEffect(() => {
-  //   if (!location) {
-  //     location.Key = '250575'
-  //   }
-  //   }, [])
-
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
     fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
