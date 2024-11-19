@@ -10,8 +10,14 @@ const App = () => {
   const [theme, setTheme] = useState("light");
   const [data, setData] = useState(null);
   const [currentWeather, setCurrentWeather] = useState()
-  const [city, setCity] = useState('Utrecht');
-  const [location, setLocation] = useState('250575');
+  const [city, setCity] = useState('Amsterdam');
+  const [location, setLocation] = useState({
+    "Key":"249758",
+    "LocalizedName":"Amsterdam",
+    "Country":{
+       "LocalizedName":"Nederland"
+    }
+ });
 
   const themeToggler = () => {
     let toggle = document.querySelector(".theme-toggle")
@@ -171,17 +177,25 @@ max-width: 100%;
   cursor: pointer;
 }
 
+.input {
+width: 200px;
+box-sizing: border-box;
+border: 1px solid white;
+padding: 5px;
+}
+
 .suggestions-container {
   font-size: 0.85rem;
   color: white;
   position: relative;
+    width: 200px;
 }
 
 .searchbar-suggestions {
-  width: 10.4rem;
+  box-sizing: border-box;
+  width: 100%;
   position: absolute;
   margin: 0 auto;
-  left: -5.4rem;
   right: 0;
   z-index: 3;
   border: 1px solid white;
