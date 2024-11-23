@@ -11,7 +11,12 @@ export default function InputBar({ setCity, location, setLocation }) {
 useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        getCurrentLocation(position.coords.latitude + ',' + position.coords.longitude)
+        console.log("Coordinates:", coordinates);
+        const coordinates = position.coords.latitude + ',' + position.coords.longitude;
+        getCurrentLocation(coordinates)
+      },
+      (error) => {
+          console.error("Geolocation error:", error);
       });
     } else {
       console.log("Geolocation is not supported by this browser.");
