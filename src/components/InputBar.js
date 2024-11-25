@@ -9,13 +9,13 @@ export default function InputBar({ setCity, location, setLocation }) {
   const [coordinates, setCoordinates] = useState()
 
 useEffect(() => {
-    if (navigator.geolocation) {
+    if (navigator.geolocation && !navigator.userAgent.includes('Mozilla')) {
       navigator.geolocation.getCurrentPosition((position) => {
         const coordinates = position.coords.latitude + ',' + position.coords.longitude;
         getCurrentLocation(coordinates)
       })
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      // console.log("Geolocation is not supported by this browser.");
     }
 }, [])
 
