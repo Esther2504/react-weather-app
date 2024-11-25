@@ -11,13 +11,9 @@ export default function InputBar({ setCity, location, setLocation }) {
 useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log("Coordinates:", coordinates);
         const coordinates = position.coords.latitude + ',' + position.coords.longitude;
         getCurrentLocation(coordinates)
-      },
-      (error) => {
-          console.error("Geolocation error:", error);
-      });
+      })
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -28,7 +24,6 @@ function getCurrentLocation(coordinates) {
   fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
   .then(res => res.json())
   .then(data => {
-    console.log(data)
     setLocation(data)
   })
 }
@@ -38,7 +33,6 @@ function getCurrentLocation(coordinates) {
     fetch(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?q=${searchinput}&language=nl-nl&apikey=${process.env.REACT_APP_API_KEYACCU}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         changeCities(data)
       })
   }, [searchinput])

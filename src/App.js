@@ -42,16 +42,11 @@ const App = () => {
   })
       .then(weatherdata => {
         setData(weatherdata.DailyForecasts)
-        console.log(weatherdata.DailyForecasts)
       })
       .catch((error) => {
         console.log(error)
       });
   }, [location])
-
-  useEffect(() => {
-    console.log(location)
-  }, [])
 
 
   useEffect(() => {
@@ -64,7 +59,6 @@ const App = () => {
     })
     .then(data => {
       setCurrentWeather(data[0])
-      console.log(data)
     })
     .catch((error) => {
       console.log(error)

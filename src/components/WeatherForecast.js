@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import icons from '../assets/icons';
 
 export default function WeatherForecast({ data }) {
-  console.log(data[0].Day?.IconPhrase)
   return (
     <Wrapper>
       {data.map((day) => {
