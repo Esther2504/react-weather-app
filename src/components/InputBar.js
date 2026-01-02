@@ -8,32 +8,34 @@ export default function InputBar({ setCity, location, setLocation }) {
   const [inputvalue, changeInputvalue] = useState([]);
   const [coordinates, setCoordinates] = useState()
 
-useEffect(() => {
-    if (navigator.geolocation && !navigator.userAgent.includes('Mozilla')) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const coordinates = position.coords.latitude + ',' + position.coords.longitude;
-        getCurrentLocation(coordinates)
-      })
-    } else {
-      // console.log("Geolocation is not supported by this browser.");
-    }
-}, [])
+// useEffect(() => {
+//     if (navigator.geolocation && !navigator.userAgent.includes('Mozilla')) {
+//       navigator.geolocation.getCurrentPosition((position) => {
+//         const coordinates = position.coords.latitude + ',' + position.coords.longitude;
+//         getCurrentLocation(coordinates)
+//       })
+//     } else {
+//       // console.log("Geolocation is not supported by this browser.");
+//     }
+// }, [])
 
 
-function getCurrentLocation(coordinates) {
-  fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
-  .then(res => res.json())
-  .then(data => {
-    setLocation(data)
-  })
-}
+// function getCurrentLocation(coordinates) {
+//   fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
+//   .then(res => res.json())
+//   .then(data => {
+//     console.log(data)
+//     setLocation(data)
+//   })
+// }
 
 
   useEffect(() => {
-    fetch(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?q=${searchinput}&language=nl-nl&apikey=${process.env.REACT_APP_API_KEYACCU}`)
+    fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${searchinput}&count=10&language=en&format=json`)
       .then(res => res.json())
       .then(data => {
-        changeCities(data)
+        console.log(data)
+        changeCities(data.results)
       })
   }, [searchinput])
 
@@ -53,14 +55,14 @@ function getCurrentLocation(coordinates) {
               <div className="searchbar-suggestions">
                 {cities.slice(0, 5).map((val, index) => {
                   return <div onClick={() => {
-                    changeInputvalue(val.LocalizedName + ", " + val.Country.LocalizedName);
+                    changeInputvalue(val.admin1 + ", " + val.country);
                     setLocation(val);
                     changeInput();
                     changeCities()
                   }}
                     className="suggests"
                     key={index}>
-                    <p>{val.LocalizedName}, {val.Country.LocalizedName}</p>
+                    <p>{val.admin1}, {val.country}</p>
                   </div>
                 }
                 )}

@@ -32,8 +32,8 @@ const App = () => {
 
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
-    fetch(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true&metric=true`)
-
+    console.log(location)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m`)
       .then(res => {
         if (res.ok) {
         return res.json();
@@ -41,6 +41,7 @@ const App = () => {
         throw new Error();
   })
       .then(weatherdata => {
+        console.log(weatherdata)
         setData(weatherdata.DailyForecasts)
       })
       .catch((error) => {
@@ -49,21 +50,21 @@ const App = () => {
   }, [location])
 
 
-  useEffect(() => {
-    fetch(`https://dataservice.accuweather.com/currentconditions/v1/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
-    .then(res => {
-      if (res.ok) {
-      return res.json();
-      }
-      throw new Error();
-    })
-    .then(data => {
-      setCurrentWeather(data[0])
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-}, [location])
+//   useEffect(() => {
+//     fetch(`https://dataservice.accuweather.com/currentconditions/v1/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
+//     .then(res => {
+//       if (res.ok) {
+//       return res.json();
+//       }
+//       throw new Error();
+//     })
+//     .then(data => {
+//       setCurrentWeather(data[0])
+//     })
+//     .catch((error) => {
+//       console.log(error)
+//     });
+// }, [location])
 
   // Het klikken van de enter key gelijk zetten aan klikken zoekbutton
   useEffect(() => {
@@ -85,14 +86,14 @@ const App = () => {
         </InputWrapper>
         {data ? (
           <>
-            <WeatherWrapper><CurrentWeather data={currentWeather} location={location} /></WeatherWrapper>
+            <WeatherWrapper><CurrentWeather data={data} location={location} /></WeatherWrapper>
             <ForecastWrapper><WeatherForecast data={data} /></ForecastWrapper>
           </>
         )
           :
           <>
             <ErrorWrapper>
-              <img alt="sad-cloud" src="icons/error.svg"></img>
+              <img alt="sad-cloud" src="icons/sad-cloud.svg"></img>
               <h2>Oeps, er ging iets mis</h2><p>Kom later terug om het<br></br>opnieuw te proberen</p>
             </ErrorWrapper>
           </>
