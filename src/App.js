@@ -42,7 +42,7 @@ const App = () => {
   })
       .then(weatherdata => {
         console.log(weatherdata)
-        setData(weatherdata.DailyForecasts)
+        setData(weatherdata)
       })
       .catch((error) => {
         console.log(error)
@@ -87,7 +87,7 @@ const App = () => {
         {data ? (
           <>
             <WeatherWrapper><CurrentWeather data={data} location={location} /></WeatherWrapper>
-            <ForecastWrapper><WeatherForecast data={data} /></ForecastWrapper>
+            {/* <ForecastWrapper><WeatherForecast data={data} /></ForecastWrapper> */}
           </>
         )
           :

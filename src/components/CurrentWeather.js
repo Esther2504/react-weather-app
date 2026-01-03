@@ -2,17 +2,19 @@ import React from 'react'
 import styled from 'styled-components';
 
 export default function CurrentWeather({ location, data }) {
-  let currentDate = (new Date(data?.LocalObservationDateTime)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+  // let currentDate = (new Date(data?.LocalObservationDateTime)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+
+  console.log(data)
 
   return (
     <>
       <CityDate>   
-        <p className="city">{location?.LocalizedName}, {location?.Country?.LocalizedName}</p>
-        <p className='date'>{currentDate}</p>
+        <p className="city">{location?.admin1}, {location?.country}</p>
+        {/* <p className='date'>{currentDate}</p> */}
       </CityDate>
       <Weather>
-        <img alt={data?.WeatherText} src={`/react-weather-app/icons/${data?.WeatherIcon}.svg`}></img>
-        <h1>{data?.Temperature?.Metric?.Value}°C</h1>
+        {/* <img alt={data?.WeatherText} src={`/react-weather-app/icons/${data?.WeatherIcon}.svg`}></img> */}
+        <h1>{data?.current.temperature_2m}°C</h1>
       </Weather>
     </>
   )
