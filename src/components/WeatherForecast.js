@@ -21,16 +21,22 @@ export default function WeatherForecast({ data }) {
         </div>
         <div className="flip-card-back">
           <div className="weather-info">
-            {/* <img alt="bewolktheid" src={icons.cloudiness}></img>
-            <p>{day.Day?.CloudCover}%</p> */}
-            <img alt={data.wind_speed_10m_max[key]} src={icons.winddirection}></img>
-            <p>{data.wind_speed_10m_max[key]} km/h</p>
-          </div>
-          <div className="weather-info">
+            <div>
+            <img alt="regenval" src={icons.rainsum}></img>
+            <p>{data.precipitation_sum[key]} mm</p>
+            </div>
+            <div>
             <img alt="regenkans" src={icons.rainchance}></img>
             <p>{data.precipitation_probability_max[key]}%</p>
+            </div>
+            <div>
+            <img alt={data.wind_speed_10m_max[key]} src={icons.wind}></img>
+            <p>{data.wind_speed_10m_max[key]} km/h</p>
+            </div>
+            <div>
             <img alt="uv-index" src={icons.uvindex}></img>
             <p>{data.uv_index_max[key]}</p>
+            </div>
           </div> 
         </div>
       </div>
@@ -111,11 +117,15 @@ margin-left: 0.5rem;
 
   p {
     font-size: 0.8rem;
-    margin-top: 0;
+    margin: 0;
   }
 
   .weather-info {
-    margin: 0.8rem; 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    padding: 5px;
   }
 }
 
