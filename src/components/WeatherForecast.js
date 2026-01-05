@@ -3,30 +3,35 @@ import styled from 'styled-components'
 import icons from '../assets/icons';
 
 export default function WeatherForecast({ data }) {
+
+  const forecastDates = (data.time).slice(1, 6)
+
+  console.log(data)
+
   return (
     <Wrapper>
-      {data.map((day) => {
+      {forecastDates.map((day, key) => {
         return (
       <div className="flip-card">
       <div className="flip-card-inner">
         <div className='flip-card-front'>
-          <p>{(new Date((day.Date)).toLocaleDateString('nl-NL', { weekday: 'long'}))}</p>
-          <img alt={day.Day?.LongPhrase} src={`/react-weather-app/icons/${day.Day?.Icon}.svg`}></img>
-          <p>{day.Temperature?.Maximum?.Value}°C</p>
+          <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long'}))}</p>
+          <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`}></img>
+          <p>{data.temperature_2m_max[key]}°C</p>
         </div>
         <div className="flip-card-back">
           <div className="weather-info">
-            <img alt="bewolktheid" src={icons.cloudiness}></img>
-            <p>{day.Day?.CloudCover}%</p>
-            <img alt={day.Day?.Wind?.Direction?.Localized} src={icons.winddirection} style={{transform: `rotate(${day.Day?.Wind?.Direction?.Degrees}deg)`}}></img>
-            <p>{day.Day?.Wind?.Speed?.Value} km/h</p>
+            {/* <img alt="bewolktheid" src={icons.cloudiness}></img>
+            <p>{day.Day?.CloudCover}%</p> */}
+            <img alt={data.wind_speed_10m_max[key]} src={icons.winddirection}></img>
+            <p>{data.wind_speed_10m_max[key]} km/h</p>
           </div>
           <div className="weather-info">
             <img alt="regenkans" src={icons.rainchance}></img>
-            <p>{day.Day?.RainProbability}%</p>
+            <p>{data.precipitation_probability_max[key]}%</p>
             <img alt="uv-index" src={icons.uvindex}></img>
-            <p>{day.AirAndPollen[5]?.Value}<br></br>/12</p>
-          </div>
+            <p>{data.uv_index_max[key]}</p>
+          </div> 
         </div>
       </div>
     </div>
