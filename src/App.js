@@ -8,7 +8,7 @@ import icons from './assets/icons';
 
 const App = () => {
   const [theme, setTheme] = useState("light");
-  const [data, setData] = useState(null);
+  const [weather, setWeather] = useState(null);
   const [currentWeather, setCurrentWeather] = useState()
   const [city, setCity] = useState('Amsterdam');
   const [location, setLocation] = useState({
@@ -32,8 +32,7 @@ const App = () => {
 
   // Weerdata ophalen met coördinaten uit de andere API
   useEffect(() => {
-    console.log(location)
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m`)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=weather_code,temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m`)
       .then(res => {
         if (res.ok) {
         return res.json();
@@ -41,8 +40,7 @@ const App = () => {
         throw new Error();
   })
       .then(weatherdata => {
-        console.log(weatherdata)
-        setData(weatherdata)
+        setCurrentWeather(weatherdata)
       })
       .catch((error) => {
         console.log(error)
@@ -50,21 +48,22 @@ const App = () => {
   }, [location])
 
 
-//   useEffect(() => {
-//     fetch(`https://dataservice.accuweather.com/currentconditions/v1/${location.Key}?apikey=${process.env.REACT_APP_API_KEYACCU}&language=nl-nl&details=true`)
-//     .then(res => {
-//       if (res.ok) {
-//       return res.json();
-//       }
-//       throw new Error();
-//     })
-//     .then(data => {
-//       setCurrentWeather(data[0])
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     });
-// }, [location])
+  useEffect(() => {
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=weather_code,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max`)
+    .then(res => {
+      if (res.ok) {
+      return res.json();
+      }
+      throw new Error();
+    })
+    .then(data => {
+      setWeather(data)
+      console.log(data)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+}, [location])
 
   // Het klikken van de enter key gelijk zetten aan klikken zoekbutton
   useEffect(() => {
@@ -84,10 +83,10 @@ const App = () => {
         <InputWrapper>
           <InputBar setCity={setCity} location={location} setLocation={setLocation} />
         </InputWrapper>
-        {data ? (
+        {weather ? (
           <>
-            <WeatherWrapper><CurrentWeather data={data} location={location} /></WeatherWrapper>
-            {/* <ForecastWrapper><WeatherForecast data={data} /></ForecastWrapper> */}
+            <WeatherWrapper><CurrentWeather data={currentWeather} location={location} /></WeatherWrapper>
+            <ForecastWrapper><WeatherForecast data={weather} /></ForecastWrapper>
           </>
         )
           :

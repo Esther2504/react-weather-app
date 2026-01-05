@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 export default function CurrentWeather({ location, data }) {
-  // let currentDate = (new Date(data?.LocalObservationDateTime)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+  let currentDate = (new Date(data?.current.time)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
   console.log(data)
 
@@ -10,10 +10,10 @@ export default function CurrentWeather({ location, data }) {
     <>
       <CityDate>   
         <p className="city">{location?.admin1}, {location?.country}</p>
-        {/* <p className='date'>{currentDate}</p> */}
+        <p className='date'>{currentDate}</p>
       </CityDate>
       <Weather>
-        {/* <img alt={data?.WeatherText} src={`/react-weather-app/icons/${data?.WeatherIcon}.svg`}></img> */}
+        <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
         <h1>{data?.current.temperature_2m}°C</h1>
       </Weather>
     </>
