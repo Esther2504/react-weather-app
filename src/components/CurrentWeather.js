@@ -9,7 +9,7 @@ export default function CurrentWeather({ location, data }) {
   return (
     <>
       <CityDate>   
-        <p className="city">{location?.admin1}, {location?.country}</p>
+        <p className="city">{location?.display_name}</p>
         <p className='date'>{currentDate}</p>
       </CityDate>
       <Weather>

@@ -49,7 +49,7 @@ const App = () => {
 
 
   useEffect(() => {
-    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=weather_code,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,wind_speed_10m_max,precipitation_probability_max,precipitation_sum`)
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&daily=weather_code,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,wind_speed_10m_max,precipitation_probability_max,precipitation_sum`)
     .then(res => {
       if (res.ok) {
       return res.json();

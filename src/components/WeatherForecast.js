@@ -15,7 +15,7 @@ export default function WeatherForecast({ data }) {
       <div className="flip-card">
       <div className="flip-card-inner">
         <div className='flip-card-front'>
-          <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long'}))}</p>
+          <p>{(new Date((day)).toLocaleDateString('en-EN', { weekday: 'long'}))}</p>
           <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`}></img>
           <p>{data.temperature_2m_max[key]}°C</p>
         </div>
@@ -31,11 +31,11 @@ export default function WeatherForecast({ data }) {
             </div>
             <div>
             <img alt={data.wind_speed_10m_max[key]} src={icons.wind}></img>
-            <p>{data.wind_speed_10m_max[key]} km/h</p>
+            <p>{data.wind_speed_10m_max[key]}<br/>km/h</p>
             </div>
             <div>
             <img alt="uv-index" src={icons.uvindex}></img>
-            <p>{data.uv_index_max[key]}</p>
+            <p>{data.uv_index_max[key].toFixed(1)}</p>
             </div>
           </div> 
         </div>
@@ -122,6 +122,7 @@ margin-left: 0.5rem;
 
   .weather-info {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     align-items: center;

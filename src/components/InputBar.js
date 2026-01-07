@@ -8,34 +8,40 @@ export default function InputBar({ setCity, location, setLocation }) {
   const [inputvalue, changeInputvalue] = useState([]);
   const [coordinates, setCoordinates] = useState()
 
-// useEffect(() => {
-//     if (navigator.geolocation && !navigator.userAgent.includes('Mozilla')) {
-//       navigator.geolocation.getCurrentPosition((position) => {
-//         const coordinates = position.coords.latitude + ',' + position.coords.longitude;
-//         getCurrentLocation(coordinates)
-//       })
-//     } else {
-//       // console.log("Geolocation is not supported by this browser.");
-//     }
-// }, [])
+  // useEffect(() => {
+  //     if (navigator.geolocation && !navigator.userAgent.includes('Mozilla')) {
+  //       navigator.geolocation.getCurrentPosition((position) => {
+  //         const coordinates = position.coords.latitude + ',' + position.coords.longitude;
+  //         getCurrentLocation(coordinates)
+  //       })
+  //     } else {
+  //       // console.log("Geolocation is not supported by this browser.");
+  //     }
+  // }, [])
 
 
-// function getCurrentLocation(coordinates) {
-//   fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
-//   .then(res => res.json())
-//   .then(data => {
-//     console.log(data)
-//     setLocation(data)
-//   })
-// }
+  // function getCurrentLocation(coordinates) {
+  //   fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)
+  //     setLocation(data)
+  //   })
+  // }
 
+  const allowedTypes = ["city", "town", "village"]
 
   useEffect(() => {
-    fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${searchinput}&count=10&language=en&format=json`)
+    fetch(`https://geocode.maps.co/search?city=${searchinput}&addressdetails=0&namedetails=0&accept-language=nl&extratags=0&api_key=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        changeCities(data.results)
+        changeCities(data.filter(result =>
+          allowedTypes.includes(result.addresstype)
+        ))
+      })
+      .catch(error => {
+        throw (error);
       })
   }, [searchinput])
 
@@ -55,14 +61,14 @@ export default function InputBar({ setCity, location, setLocation }) {
               <div className="searchbar-suggestions">
                 {cities.slice(0, 5).map((val, index) => {
                   return <div onClick={() => {
-                    changeInputvalue(val.admin1 + ", " + val.country);
+                    changeInputvalue(val.display_name);
                     setLocation(val);
                     changeInput();
                     changeCities()
                   }}
                     className="suggests"
                     key={index}>
-                    <p>{val.admin1}, {val.country}</p>
+                    <p>{val.display_name}</p>
                   </div>
                 }
                 )}
