@@ -29,20 +29,36 @@ export default function InputBar({ setCity, location, setLocation }) {
   //   })
   // }
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      fetch(`https://geocode.maps.co/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&namedetails=0&accept-language=nl&api_key=${process.env.REACT_APP_API_KEY}`)
+        .then(res => res.json())
+        .then(data => {
+          setLocation({ lat: position.coords.latitude, lon: position.coords.longitude, display_name: data.address.village + ", " + data.address.country })
+        })
+        .catch(error => {
+          throw (error);
+        })
+
+    });
+  }, [window])
+
   const allowedTypes = ["city", "town", "village"]
 
   useEffect(() => {
-    fetch(`https://geocode.maps.co/search?city=${searchinput}&addressdetails=0&namedetails=0&accept-language=nl&extratags=0&api_key=${process.env.REACT_APP_API_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        changeCities(data.filter(result =>
-          allowedTypes.includes(result.addresstype)
-        ))
-      })
-      .catch(error => {
-        throw (error);
-      })
+    if (searchinput) {
+      fetch(`https://geocode.maps.co/search?city=${searchinput}&addressdetails=0&namedetails=0&accept-language=nl&extratags=0&api_key=${process.env.REACT_APP_API_KEY}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          changeCities(data.filter(result =>
+            allowedTypes.includes(result.addresstype)
+          ))
+        })
+        .catch(error => {
+          throw (error);
+        })
+    }
   }, [searchinput])
 
   // Bij onChange worden de input states geupdate, waardoor de input gebruikt kan worden voor het filteren en laten zien van de suggesties

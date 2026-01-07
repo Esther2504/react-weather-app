@@ -23,7 +23,7 @@ export default function CurrentWeather({ location, data }) {
 // Styled components
 const CityDate = styled.div`
 .city {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-top: 5px;
 }
 

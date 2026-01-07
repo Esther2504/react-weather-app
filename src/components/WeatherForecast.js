@@ -15,7 +15,7 @@ export default function WeatherForecast({ data }) {
       <div className="flip-card">
       <div className="flip-card-inner">
         <div className='flip-card-front'>
-          <p>{(new Date((day)).toLocaleDateString('en-EN', { weekday: 'long'}))}</p>
+          <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long'}))}</p>
           <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`}></img>
           <p>{data.temperature_2m_max[key]}°C</p>
         </div>
