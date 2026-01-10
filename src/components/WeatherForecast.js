@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import icons from '../assets/icons';
 
-export default function WeatherForecast({ data }) {
+export default function WeatherForecast({ data, seeWeatherDetails }) {
 
   const forecastDates = (data.time).slice(1, 6)
 
@@ -10,6 +10,11 @@ export default function WeatherForecast({ data }) {
 
   return (
     <Wrapper>
+      {seeWeatherDetails ?
+      <div>
+        
+      </div>
+    : <>
       {forecastDates.map((day, key) => {
         return (
       <div className="flip-card">
@@ -43,6 +48,7 @@ export default function WeatherForecast({ data }) {
     </div>
         )
       })}
+    </>}
     </Wrapper>
   )
 }

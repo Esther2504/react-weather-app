@@ -87,7 +87,7 @@ const App = () => {
         {weather ? (
           <>
             <WeatherWrapper><CurrentWeather data={currentWeather} location={location} seeWeatherDetails={seeWeatherDetails} setSeeWeatherDetails={setSeeWeatherDetails} /></WeatherWrapper>
-            <ForecastWrapper><WeatherForecast data={weather.daily} /></ForecastWrapper>
+            <ForecastWrapper><WeatherForecast data={weather.daily} seeWeatherDetails={seeWeatherDetails} /></ForecastWrapper>
           </>
         ) :
           <>
@@ -186,6 +186,7 @@ border-radius: 5px;
 
 const WeatherWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 48rem;
   max-width: 100%;
   height: 15rem;

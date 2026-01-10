@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import icons from '../assets/icons';
 
 export default function CurrentWeather({ location, data, seeWeatherDetails, setSeeWeatherDetails }) {
   let currentDate = (new Date(data?.current.time)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
@@ -10,36 +11,41 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
 
   return (
     <>
-    {seeWeatherDetails ? 
-    <>
-    <div onClick={() => setSeeWeatherDetails(false)}>Arrow</div>
-      <CityDate>   
-        <p className="city">{location?.display_name}</p>
-        <p className='date'>{currentDate}</p>
-      </CityDate>
-      <Weather>
-        <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
-        <h1>{data?.current.temperature_2m}°C</h1>
-        <p>Bewolking: {data.current.cloud_cover} %</p>
-        <p>Gevoelstemperatuur: {data.current.apparent_temperature}</p>
-        <p>Gevoelstemperatuur: {data.relative_humidity_2m}</p>
-        <p>Gevoelstemperatuur: {data.rain}</p>
-        <p>Gevoelstemperatuur: {data.wind_speed_10m}</p>
-      </Weather>
-    </>
-      :
-    <>
-      <CityDate>   
-        <p className="city">{location?.display_name}</p>
-        <p className='date'>{currentDate}</p>
-      </CityDate>
-      <Weather>
-        <div onClick={() => setSeeWeatherDetails(true)}>Arrow</div>
-        <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
-        <h1>{data?.current.temperature_2m}°C</h1>
-      </Weather>
-    </>
-    }
+      {seeWeatherDetails ?
+        <>
+          {/* <div onClick={() => setSeeWeatherDetails(false)}>Arrow</div> */}
+          <CityTemp>
+            <CityDate>
+              <p className="city">{location?.display_name}</p>
+              <p className='date'>{currentDate}</p>
+            </CityDate>
+            <Temp>
+              <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
+              <h1>{data?.current.temperature_2m}°C</h1>
+              <p>Gevoelstemperatuur: {data.current.apparent_temperature}°C</p>
+            </Temp>
+          </CityTemp>
+          <WeatherDetails>
+            <div><img alt={data?.current.weather_code} src={icons.cloudiness} /> Bewolktheid <br/>{data.current.cloud_cover}%</div>
+            
+            <div><img alt={data?.current.weather_code} src={icons.humidity} /> Luchtvochtigheid:<br/>{data.current.relative_humidity_2m}</div>
+            <div><img alt={data?.current.weather_code} src={icons.rainchance} /> Neerslag:<br/>{data.current.precipitation}</div>
+            <div><img alt={data?.current.weather_code} src={icons.wind} /> Wind:<br/>{data.current.wind_speed_10m} km p/u</div>
+          </WeatherDetails>
+        </>
+        :
+        <>
+          <CityDate>
+            <p className="city">{location?.display_name}</p>
+            <p className='date'>{currentDate}</p>
+          </CityDate>
+          <Weather>
+            <div onClick={() => setSeeWeatherDetails(true)}>Arrow</div>
+            <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
+            <h1>{data?.current.temperature_2m}°C</h1>
+          </Weather>
+        </>
+      }
     </>
   )
 }
@@ -93,3 +99,46 @@ h1 {
   }
 }
 `
+
+const WeatherDetails = styled.div`
+width: 100%;
+display: flex;
+gap: 20px;
+
+div {
+display: flex;
+gap: 10px;
+align-items: center;
+
+img {
+width: 30px;
+}
+}
+`
+
+const CityTemp = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+
+img {
+width: 150px
+}
+`
+const Temp = styled.div`
+    width: 280px;
+    text-align: center;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    h1 {
+    margin: 0;
+    }
+
+    p {
+           margin: -16px 0 16px 0;
+        }
+    `
