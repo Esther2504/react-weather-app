@@ -1,13 +1,18 @@
 import React from 'react'
 import styled from 'styled-components';
 
-export default function CurrentWeather({ location, data }) {
+export default function CurrentWeather({ location, data, seeWeatherDetails, setSeeWeatherDetails }) {
   let currentDate = (new Date(data?.current.time)).toLocaleDateString('nl-NL', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
   console.log(data)
 
+  console.log(seeWeatherDetails)
+
   return (
     <>
+    {seeWeatherDetails ? 
+    <>
+    <div onClick={() => setSeeWeatherDetails(false)}>Arrow</div>
       <CityDate>   
         <p className="city">{location?.display_name}</p>
         <p className='date'>{currentDate}</p>
@@ -15,7 +20,26 @@ export default function CurrentWeather({ location, data }) {
       <Weather>
         <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
         <h1>{data?.current.temperature_2m}°C</h1>
+        <p>Bewolking: {data.current.cloud_cover} %</p>
+        <p>Gevoelstemperatuur: {data.current.apparent_temperature}</p>
+        <p>Gevoelstemperatuur: {data.relative_humidity_2m}</p>
+        <p>Gevoelstemperatuur: {data.rain}</p>
+        <p>Gevoelstemperatuur: {data.wind_speed_10m}</p>
       </Weather>
+    </>
+      :
+    <>
+      <CityDate>   
+        <p className="city">{location?.display_name}</p>
+        <p className='date'>{currentDate}</p>
+      </CityDate>
+      <Weather>
+        <div onClick={() => setSeeWeatherDetails(true)}>Arrow</div>
+        <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
+        <h1>{data?.current.temperature_2m}°C</h1>
+      </Weather>
+    </>
+    }
     </>
   )
 }

@@ -11,6 +11,7 @@ const App = () => {
   const [weather, setWeather] = useState(null);
   const [currentWeather, setCurrentWeather] = useState()
   const [city, setCity] = useState('Amsterdam');
+  const [seeWeatherDetails, setSeeWeatherDetails] = useState(false)
   const [location, setLocation] = useState({
     "Key":"249758",
     "LocalizedName":"Amsterdam",
@@ -74,7 +75,7 @@ const App = () => {
       }
     });
   }, [city])
-  
+
   return (
     <>
       <GlobalStyle theme={theme === "light" ? lightTheme : darkTheme} />
@@ -85,11 +86,10 @@ const App = () => {
         </InputWrapper>
         {weather ? (
           <>
-            <WeatherWrapper><CurrentWeather data={currentWeather} location={location} /></WeatherWrapper>
+            <WeatherWrapper><CurrentWeather data={currentWeather} location={location} seeWeatherDetails={seeWeatherDetails} setSeeWeatherDetails={setSeeWeatherDetails} /></WeatherWrapper>
             <ForecastWrapper><WeatherForecast data={weather.daily} /></ForecastWrapper>
           </>
-        )
-          :
+        ) :
           <>
             <ErrorWrapper>
               <img alt="sad-cloud" src="icons/sad-cloud.svg"></img>
@@ -146,6 +146,7 @@ width: 200px;
 box-sizing: border-box;
 border: 1px solid white;
 padding: 5px;
+border-radius: 5px;
 }
 
 .suggestions-container {
@@ -191,8 +192,7 @@ const WeatherWrapper = styled.div`
   max-height: 100%;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  border: 0 1px solid white;
+  padding: 1.3rem;
   border-radius: 1.5rem 1.5rem 0 0;
   max-width: 100%;
   margin: 0 auto;
@@ -213,7 +213,7 @@ const ForecastWrapper = styled.div`
   height: 11rem;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 1.3rem;
   border-top: 1px solid white;
   border-radius: 0 0 1.5rem 1.5rem;
   max-width: 100%;
