@@ -8,6 +8,7 @@ import wind from './images/wind.svg'
 import sun from './images/sun.svg'
 import moon from './images/moon.svg'
 import humidity from './images/humidity.svg'
+import airpressure from './images/airpressure.svg'
 
 export default {
     'cloudiness': cloudiness,
@@ -19,5 +20,6 @@ export default {
     'sun': sun,
     'moon': moon,
     'rainsum': rainsum,
-    'humidity': humidity
+    'humidity': humidity,
+    'airpressure': airpressure
 };
