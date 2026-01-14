@@ -105,6 +105,7 @@ width: 100%;
 display: flex;
 gap: 20px;
 justify-content: space-between;
+margin: 20px 0 0;
 
 div {
 display: flex;
@@ -129,7 +130,7 @@ width: 150px
 const Temp = styled.div`
     width: 280px;
     text-align: center;
-        display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -140,6 +141,6 @@ const Temp = styled.div`
     }
 
     p {
-           margin: -16px 0 16px 0;
-        }
+        margin: -6px 0 16px 0;
+      }
     `

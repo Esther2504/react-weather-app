@@ -2,17 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import icons from '../assets/icons';
 
-export default function WeatherForecast({ data, seeWeatherDetails }) {
+export default function WeatherForecast({ data, seeWeatherDetails, current, setSeeWeatherDetails }) {
 
   const forecastDates = (data.time).slice(1, 6)
 
-  console.log(data)
+  const hourlyRain = current.hourly.rain
+
+  console.log(hourlyRain)
 
   return (
     <Wrapper>
       {seeWeatherDetails ?
       <div>
-        
+        {hourlyRain.map((item, key) => {
+          return <p>{item} mm</p>
+        })}
       </div>
     : <>
       {forecastDates.map((day, key) => {
