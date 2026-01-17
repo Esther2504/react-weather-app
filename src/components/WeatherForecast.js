@@ -13,46 +13,48 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
   return (
     <Wrapper>
       {seeWeatherDetails ?
-      <div>
-        {hourlyRain.map((item, key) => {
-          return <p>{item} mm</p>
-        })}
-      </div>
-    : <>
-      {forecastDates.map((day, key) => {
-        return (
-      <div className="flip-card">
-      <div className="flip-card-inner">
-        <div className='flip-card-front'>
-          <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long'}))}</p>
-          <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`}></img>
-          <p>{data.temperature_2m_max[key]}°C</p>
-        </div>
-        <div className="flip-card-back">
-          <div className="weather-info">
-            <div>
-            <img alt="regenval" src={icons.rainsum}></img>
-            <p>{data.precipitation_sum[key]} mm</p>
-            </div>
-            <div>
-            <img alt="regenkans" src={icons.rainchance}></img>
-            <p>{data.precipitation_probability_max[key]}%</p>
-            </div>
-            <div>
-            <img alt={data.wind_speed_10m_max[key]} src={icons.wind}></img>
-            <p>{data.wind_speed_10m_max[key]}<br/>km/h</p>
-            </div>
-            <div>
-            <img alt="uv-index" src={icons.uvindex}></img>
-            <p>{data.uv_index_max[key].toFixed(1)}</p>
-            </div>
-          </div> 
-        </div>
-      </div>
-    </div>
-        )
-      })}
-    </>}
+        <RainChart>
+          {hourlyRain.map((item, key) => {
+            return (
+              <div class="rainpoint" data-rain={item} style={{ bottom: `${(item / 25) * 100}%`}}></div>
+            )
+          })}
+        </RainChart>
+        : <>
+          {forecastDates.map((day, key) => {
+            return (
+              <div className="flip-card">
+                <div className="flip-card-inner">
+                  <div className='flip-card-front'>
+                    <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long' }))}</p>
+                    <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`}></img>
+                    <p>{data.temperature_2m_max[key]}°C</p>
+                  </div>
+                  <div className="flip-card-back">
+                    <div className="weather-info">
+                      <div>
+                        <img alt="regenval" src={icons.rainsum}></img>
+                        <p>{data.precipitation_sum[key]} mm</p>
+                      </div>
+                      <div>
+                        <img alt="regenkans" src={icons.rainchance}></img>
+                        <p>{data.precipitation_probability_max[key]}%</p>
+                      </div>
+                      <div>
+                        <img alt={data.wind_speed_10m_max[key]} src={icons.wind}></img>
+                        <p>{data.wind_speed_10m_max[key]}<br />km/h</p>
+                      </div>
+                      <div>
+                        <img alt="uv-index" src={icons.uvindex}></img>
+                        <p>{data.uv_index_max[key].toFixed(1)}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </>}
     </Wrapper>
   )
 }
@@ -61,6 +63,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
 const Wrapper = styled.div`
 display: flex;
 margin-left: 0.5rem;
+width: 100%;
 
 .flip-card {
   height: 9.5rem;
@@ -169,3 +172,32 @@ margin-left: 0.5rem;
      }
  }
 `
+
+const RainChart = styled.div`
+  width: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  border-bottom: 1px solid #fff;
+
+  .rainpoint {
+   bottom: 0;
+   left: 0;
+   position: absolute;
+   background-color: #ffffff;
+   width: 10px;
+   height: 10px;
+   border-radius: 99%;
+  }
+
+  .rainpoint::before {
+    content: attr(data-rain) " mm";
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.7rem;
+    width: 50px;
+  }
+`
+// 25 mm max
