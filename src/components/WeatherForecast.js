@@ -17,11 +17,13 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
           {hourlyRain.map((item, key) => {
             return (
               <div style={{position: "relative"}}>
-              <div className="rainpoint" data-rain={item} style={{ height: `${(item / 8) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`}}></div>
+              <div className="rainpoint" data-rain={item} style={{ height: `${(item / 20) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`, maxHeight: "90%"}}></div>
               {key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{key}:00</p> : null}
               </div>
             )
           })}
+          <hr class="rain-line max-rain" />
+          <hr class="rain-line avg-rain" />
         </RainChart>
         : <>
           {forecastDates.map((day, key) => {
@@ -66,6 +68,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
 const Wrapper = styled.div`
 display: flex;
 margin-left: 0.5rem;
+margin-bottom: 0.5rem;
 width: 100%;
 
 .flip-card {
@@ -196,11 +199,33 @@ const RainChart = styled.div`
   .rainpoint::before {
     content: attr(data-rain);
     position: absolute;
-    bottom: 2px;
+    bottom: 140%;
     font-size: 0.7rem;
     width: 25px;
     text-align: center;
     line-height: 1;
-    // left: -15px;
+  }
+
+  .rain-line {
+    position: absolute;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ffffffad;
+    margin: 0;
+  }
+  .max-rain::before {
+    content: "Zware neerslag";
+    font-size: 0.7rem;
+    color: #fff;
+  }
+
+  .avg-rain {
+  top: 75px;
+  }
+
+    .avg-rain::before {
+    content: "Matige neerslag";
+    font-size: 0.7rem;
+    color: #fff;
   }
 `
