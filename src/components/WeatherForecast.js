@@ -17,8 +17,8 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
           {hourlyRain.map((item, key) => {
             return (
               <div style={{position: "relative"}}>
-              <div className="rainpoint" data-rain={item} style={{ bottom: `${(item / 20) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`}}></div>
-              <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{key}:00</p>
+              <div className="rainpoint" data-rain={item} style={{ height: `${(item / 8) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`}}></div>
+              {key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{key}:00</p> : null}
               </div>
             )
           })}
@@ -187,18 +187,20 @@ const RainChart = styled.div`
    bottom: 0;
    left: 0;
    position: absolute;
-   background-color: #ffffff;
-   width: 10px;
-   height: 10px;
-   border-radius: 99%;
+   background-color: #ffffff61;
+    width: 25px;
+   height: 1px;
+  //  border-radius: 99%;
   }
 
   .rainpoint::before {
-    content: attr(data-rain) " mm";
+    content: attr(data-rain);
     position: absolute;
-    bottom: 12px;
+    bottom: 2px;
     font-size: 0.7rem;
-    width: 50px;
-    left: -15px;
+    width: 25px;
+    text-align: center;
+    line-height: 1;
+    // left: -15px;
   }
 `
