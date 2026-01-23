@@ -10,6 +10,10 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
 
   console.log(hourlyRain)
 
+    const currentHour = new Date();
+
+  console.log(currentHour)
+
   return (
     <Wrapper>
       {seeWeatherDetails ?
@@ -18,7 +22,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
             return (
               <div style={{position: "relative"}}>
               <div className="rainpoint" data-rain={item} style={{ height: `${(item / 20) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`, maxHeight: "90%"}}></div>
-              {key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{key}:00</p> : null}
+              {key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{new Date(currentHour.setHours(currentHour.getHours() + 6)).getHours() + key}:00</p> : null}
               </div>
             )
           })}
@@ -32,7 +36,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
                 <div className="flip-card-inner">
                   <div className='flip-card-front'>
                     <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long' }))}</p>
-                    <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`}></img>
+                    <img alt={data.weather_code[key]} src={`/react-weather-app/icons/${data.weather_code[key]}.svg`} />
                     <p>{data.temperature_2m_max[key]}°C</p>
                   </div>
                   <div className="flip-card-back">

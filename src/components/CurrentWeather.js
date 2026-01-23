@@ -9,6 +9,9 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
 
   console.log(seeWeatherDetails)
 
+
+
+
   return (
     <>
       {seeWeatherDetails ?
@@ -24,14 +27,15 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
               <h1>{data?.current.temperature_2m}°C</h1>
               <p>Gevoelstemperatuur: {data.current.apparent_temperature}°C</p>
             </Temp>
-          </CityTemp>
-          <WeatherDetails>
+                      <WeatherDetails>
             <div><img alt={data?.current.weather_code} src={icons.cloudiness} /> Bewolktheid <br />{data.current.cloud_cover}%</div>
             <div><img alt={data?.current.weather_code} src={icons.humidity} /> Luchtvochtigheid<br />{data.current.relative_humidity_2m}%</div>
             <div><img alt={data?.current.weather_code} src={icons.rainchance} /> Neerslag<br />{data.current.precipitation} mm</div>
             <div><img alt={data?.current.weather_code} src={icons.wind} /> Wind<br />{data.current.wind_speed_10m} km p/u</div>
             <div><img alt={data?.current.weather_code} src={icons.airpressure} /> Luchtdruk<br />{data.current.surface_pressure} hPa</div>
           </WeatherDetails>
+          </CityTemp>
+
         </>
         :
         <>
@@ -52,6 +56,7 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
 
 // Styled components
 const CityDate = styled.div`
+    max-width: 60%;
 .city {
     font-size: 2.2rem;
     margin-top: 5px;
@@ -121,6 +126,7 @@ width: 30px;
 const CityTemp = styled.div`
 width: 100%;
 display: flex;
+flex-wrap: wrap;
 justify-content: space-between;
 
 img {
