@@ -16,8 +16,8 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
     <>
       {seeWeatherDetails ?
         <>
-          {/* <div onClick={() => setSeeWeatherDetails(false)}>Arrow</div> */}
           <CityTemp>
+                       <div onClick={() => setSeeWeatherDetails(false)} className="arrow right"><img alt="Bekijk meer" src={icons.winddirection} /></div>
             <CityDate>
               <p className="city">{location?.display_name}</p>
               <p className='date'>{currentDate}</p>
@@ -44,7 +44,7 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
             <p className='date'>{currentDate}</p>
           </CityDate>
           <Weather>
-            <div onClick={() => setSeeWeatherDetails(true)}>Arrow</div>
+            <div onClick={() => setSeeWeatherDetails(true)} className="arrow right"><img alt="Bekijk meer" src={icons.winddirection} /></div>
             <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
             <h1>{data?.current.temperature_2m}°C</h1>
           </Weather>
@@ -56,9 +56,10 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
 
 // Styled components
 const CityDate = styled.div`
-    max-width: 60%;
+max-width: 60%;
+
 .city {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     margin-top: 5px;
 }
 
@@ -93,6 +94,19 @@ h1 {
     margin-left: 0rem;
 }
 
+.arrow {
+width: 50px;
+right: -40px;
+    top: -20px;
+    position: absolute;
+    transform: rotate(90deg);
+    cursor: pointer;
+
+img {
+width: 100%;
+}
+
+}
 @media screen and (max-width: 680px) {
   right: 0;
   top: 8rem;
@@ -132,6 +146,20 @@ justify-content: space-between;
 img {
 width: 150px
 }
+
+.arrow {
+width: 50px;
+right: 10px;
+    top: 10px;
+    position: absolute;
+    transform: rotate(-90deg);
+    cursor: pointer;
+
+img {
+width: 100%;
+}
+
+}
 `
 const Temp = styled.div`
     width: 280px;
@@ -139,7 +167,6 @@ const Temp = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     flex-wrap: wrap;
 
     h1 {
