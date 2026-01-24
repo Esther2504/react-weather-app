@@ -12,7 +12,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
 
     const currentHour = new Date();
 
-  console.log(currentHour)
+  // console.log(new Date(currentHour.setHours(currentHour.getHours() + key)))
 
   return (
     <Wrapper>
@@ -22,7 +22,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
             return (
               <div style={{position: "relative"}}>
               <div className="rainpoint" data-rain={item} style={{ height: `${(item / 20) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`, maxHeight: "90%"}}></div>
-              {key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{new Date(currentHour.setHours(currentHour.getHours() + 6)).getHours() + key}:00</p> : null}
+              {key == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{(new Date(currentHour.setHours(currentHour.getHours()))).getHours().toString()}:00</p> : key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{(new Date(currentHour.setHours(currentHour.getHours() + 2))).getHours().toString()}:00</p> : null}
               </div>
             )
           })}
