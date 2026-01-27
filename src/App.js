@@ -12,6 +12,7 @@ const App = () => {
   const [currentWeather, setCurrentWeather] = useState()
   const [city, setCity] = useState('Amsterdam');
   const [seeWeatherDetails, setSeeWeatherDetails] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [location, setLocation] = useState({
     "Key":"249758",
     "LocalizedName":"Amsterdam",
@@ -45,6 +46,7 @@ const App = () => {
       })
       .catch((error) => {
         console.log(error)
+        setLoading(false)
       });
   }, [location])
 
@@ -60,6 +62,7 @@ const App = () => {
     .then(data => {
       setWeather(data)
       console.log(data)
+      setLoading(false)
     })
     .catch((error) => {
       console.log(error)
@@ -89,10 +92,9 @@ const App = () => {
             <WeatherWrapper><CurrentWeather data={currentWeather} location={location} seeWeatherDetails={seeWeatherDetails} setSeeWeatherDetails={setSeeWeatherDetails} /></WeatherWrapper>
             <ForecastWrapper><WeatherForecast data={weather.daily} current={currentWeather} seeWeatherDetails={seeWeatherDetails} setSeeWeatherDetails={setSeeWeatherDetails} /></ForecastWrapper>
           </>
-        ) :
+        ) : loading ? <Loader /> :
           <>
             <ErrorWrapper>
-              <img alt="sad-cloud" src="icons/sad-cloud.svg"></img>
               <h2>Oeps, er ging iets mis</h2><p>Kom later terug om het<br></br>opnieuw te proberen</p>
             </ErrorWrapper>
           </>
@@ -246,6 +248,34 @@ const ErrorWrapper = styled.div`
   img {
     width: 20rem;
   }
+`
+
+const Loader = styled.div`
+margin: 40vh auto;
+  width: 65px;
+  aspect-ratio: 1;
+  --g: radial-gradient(farthest-side,#0000 calc(95% - 3px),#fff calc(100% - 3px) 98%,#0000 101%) no-repeat;
+  background: var(--g), var(--g), var(--g);
+  background-size: 30px 30px;
+  animation: l10 1.5s infinite;
+
+@keyframes l10 {
+  0% {
+    background-position: 0 0, 0 100%, 100% 100%;
+  }
+  25% {
+    background-position: 100% 0, 0 100%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 0, 0 0, 100% 100%;
+  }
+  75% {
+    background-position: 100% 0, 0 0, 0 100%;
+  }
+  100% {
+    background-position: 100% 100%, 0 0, 0 100%;
+  }
+}
 `
 
 export default App;
