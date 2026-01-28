@@ -18,7 +18,6 @@ export default function InputBar({ setCity, location, setLocation }) {
         .catch(error => {
           throw (error);
         })
-
     });
   }, [window])
 
@@ -29,7 +28,6 @@ export default function InputBar({ setCity, location, setLocation }) {
       fetch(`https://geocode.maps.co/search?city=${searchinput}&addressdetails=0&namedetails=0&accept-language=nl&extratags=0&api_key=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(data => {
-          console.log(data)
           changeCities(data.filter(result =>
             allowedTypes.includes(result.addresstype)
           ))

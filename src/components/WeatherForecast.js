@@ -16,7 +16,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
         <RainChart>
           {hourlyRain.map((item, key) => {
             return (
-              <div style={{position: "relative"}}>
+              <div key={key} style={{position: "relative"}}>
               <div className="rainpoint" data-rain={item} style={{ height: `${(item / 15) * 100}%`, left: `${((key + 0.3) / 24) * 100}%`, maxHeight: "90%"}}></div>
               {key == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{(new Date(currentHour.setHours(currentHour.getHours()))).getHours().toString()}:00</p> : key % 2 == 0 ? <p className="hour" style={{position: "absolute", bottom:"-30px", fontSize: "0.7rem"}}>{(new Date(currentHour.setHours(currentHour.getHours() + 2))).getHours().toString()}:00</p> : null}
               </div>
@@ -28,7 +28,7 @@ export default function WeatherForecast({ data, seeWeatherDetails, current, setS
         : <>
           {forecastDates.map((day, key) => {
             return (
-              <div className="flip-card">
+              <div key={key} className="flip-card">
                 <div className="flip-card-inner">
                   <div className='flip-card-front'>
                     <p>{(new Date((day)).toLocaleDateString('nl-NL', { weekday: 'long' }))}</p>

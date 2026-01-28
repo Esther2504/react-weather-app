@@ -13,7 +13,7 @@ const App = () => {
   const [city, setCity] = useState('Amsterdam');
   const [seeWeatherDetails, setSeeWeatherDetails] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [location, setLocation] = useState({"lat": 522136, "lon": 45400, "display_name": "Amsterdam"});
+  const [location, setLocation] = useState({"lat": 52.377956, "lon": 4.897070, "display_name": "Amsterdam, Nederland"});
 
   const themeToggler = () => {
     let toggle = document.querySelector(".theme-toggle")
@@ -55,9 +55,8 @@ const App = () => {
     })
     .then(data => {
       setWeather(data)
-      console.log(data)
       setLoading(false)
-      seeWeatherDetails(false)
+      setSeeWeatherDetails(false)
     })
     .catch((error) => {
       console.log(error)
@@ -82,7 +81,7 @@ const App = () => {
         <InputWrapper>
           <InputBar setCity={setCity} location={location} setLocation={setLocation} />
         </InputWrapper>
-        {weather ? (
+        {weather && currentWeather ? (
           <>
             <WeatherWrapper><CurrentWeather data={currentWeather} location={location} seeWeatherDetails={seeWeatherDetails} setSeeWeatherDetails={setSeeWeatherDetails} /></WeatherWrapper>
             <ForecastWrapper><WeatherForecast data={weather.daily} current={currentWeather} seeWeatherDetails={seeWeatherDetails} setSeeWeatherDetails={setSeeWeatherDetails} /></ForecastWrapper>
@@ -101,7 +100,7 @@ const App = () => {
 
 // Styled components
 const Wrapper = styled.div`
-margin: 0 auto;
+margin: 0 auto 1rem;
 max-width: 100%;
 overflow: hidden;
 
@@ -155,7 +154,7 @@ max-width: 100%;
   font-size: 0.85rem;
   color: white;
   position: relative;
-    width: 200px;
+  width: 100%;
 }
 
 .searchbar-suggestions {
