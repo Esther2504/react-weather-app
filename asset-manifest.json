@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.js": "/react-weather-app/static/js/main.324fc5ba.js",
+    "main.js": "/react-weather-app/static/js/main.42712fc8.js",
+    "static/media/airpressure.svg": "/react-weather-app/static/media/airpressure.53979ee438aafe7b2642e2909aa1d5c0.svg",
     "static/media/rainchance.svg": "/react-weather-app/static/media/rainchance.8710986a09e03b1cf00af380ba064ecd.svg",
+    "static/media/rainsum.svg": "/react-weather-app/static/media/rainsum.8f04ba82765bc11ede92404cbea35e6f.svg",
+    "static/media/humidity.svg": "/react-weather-app/static/media/humidity.04809ca42349251396e79b9bff95f92d.svg",
     "static/media/sun.svg": "/react-weather-app/static/media/sun.26b72ea12924cdb7dacf9eccfef63197.svg",
     "static/media/windspeed.svg": "/react-weather-app/static/media/windspeed.ad7958dcee1b6b8e1590bedf10f27c52.svg",
     "static/media/cloudiness.svg": "/react-weather-app/static/media/cloudiness.d2358e0d82897150d45c37eb759539eb.svg",
     "static/media/uv-index.svg": "/react-weather-app/static/media/uv-index.31808f39093944b17e6a8e26252cea64.svg",
+    "static/media/wind.svg": "/react-weather-app/static/media/wind.570b31503fea11e13a3a17c366fdbfb4.svg",
     "static/media/moon.svg": "/react-weather-app/static/media/moon.017a31887e752bc781d5ef43e8f74962.svg",
     "index.html": "/react-weather-app/index.html",
     "static/media/winddirection.svg": "/react-weather-app/static/media/winddirection.4bdfe82ccf94abe753b2cf472f19a56d.svg",
-    "main.324fc5ba.js.map": "/react-weather-app/static/js/main.324fc5ba.js.map"
+    "main.42712fc8.js.map": "/react-weather-app/static/js/main.42712fc8.js.map"
   },
   "entrypoints": [
-    "static/js/main.324fc5ba.js"
+    "static/js/main.42712fc8.js"
   ]
 }
