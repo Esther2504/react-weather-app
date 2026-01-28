@@ -17,7 +17,7 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
       {seeWeatherDetails ?
         <>
           <CityTemp>
-                       <div onClick={() => setSeeWeatherDetails(false)} className="arrow right"><img alt="Bekijk meer" src={icons.winddirection} /></div>
+            <div onClick={() => setSeeWeatherDetails(false)} className="arrow right"><img alt="Terug" src={icons.winddirection} /></div>
             <CityDate>
               <p className="city">{location?.display_name}</p>
               <p className='date'>{currentDate}</p>
@@ -27,15 +27,14 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
               <h1>{data?.current.temperature_2m}°C</h1>
               <p>Gevoelstemperatuur: {data.current.apparent_temperature}°C</p>
             </Temp>
-                      <WeatherDetails>
-            <div><img alt={data?.current.weather_code} src={icons.cloudiness} /> Bewolktheid <br />{data.current.cloud_cover}%</div>
-            <div><img alt={data?.current.weather_code} src={icons.humidity} /> Luchtvochtigheid<br />{data.current.relative_humidity_2m}%</div>
-            <div><img alt={data?.current.weather_code} src={icons.rainchance} /> Neerslag<br />{data.current.precipitation} mm</div>
-            <div><img alt={data?.current.weather_code} src={icons.wind} /> Wind<br />{data.current.wind_speed_10m} km p/u</div>
-            <div><img alt={data?.current.weather_code} src={icons.airpressure} /> Luchtdruk<br />{data.current.surface_pressure} hPa</div>
-          </WeatherDetails>
+            <WeatherDetails>
+              <div><img alt={data?.current.weather_code} src={icons.cloudiness} /> Bewolktheid <br />{data.current.cloud_cover}%</div>
+              <div><img alt={data?.current.weather_code} src={icons.humidity} /> Luchtvochtigheid<br />{data.current.relative_humidity_2m}%</div>
+              <div><img alt={data?.current.weather_code} src={icons.rainchance} /> Neerslag<br />{data.current.precipitation} mm</div>
+              <div><img alt={data?.current.weather_code} src={icons.wind} /> Wind<br />{data.current.wind_speed_10m} km p/u</div>
+              <div><img alt={data?.current.weather_code} src={icons.airpressure} /> Luchtdruk<br />{data.current.surface_pressure} hPa</div>
+            </WeatherDetails>
           </CityTemp>
-
         </>
         :
         <>
@@ -44,7 +43,7 @@ export default function CurrentWeather({ location, data, seeWeatherDetails, setS
             <p className='date'>{currentDate}</p>
           </CityDate>
           <Weather>
-            <div onClick={() => setSeeWeatherDetails(true)} className="arrow right"><img alt="Bekijk meer" src={icons.winddirection} /></div>
+            <div onClick={() => setSeeWeatherDetails(true)} className="arrow right"><img alt="Bekijk details" src={icons.winddirection} /></div>
             <img alt={data?.current.weather_code} src={`/react-weather-app/icons/${data?.current.weather_code}.svg`}></img>
             <h1>{data?.current.temperature_2m}°C</h1>
           </Weather>
@@ -95,18 +94,18 @@ h1 {
 }
 
 .arrow {
-width: 50px;
-right: -40px;
+    width: 50px;
+    right: -40px;
     top: -20px;
     position: absolute;
     transform: rotate(90deg);
     cursor: pointer;
 
-img {
-width: 100%;
+    img {
+    width: 100%;
+    }
 }
 
-}
 @media screen and (max-width: 680px) {
   right: 0;
   top: 8rem;

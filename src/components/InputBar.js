@@ -8,27 +8,6 @@ export default function InputBar({ setCity, location, setLocation }) {
   const [inputvalue, changeInputvalue] = useState([]);
   const [coordinates, setCoordinates] = useState()
 
-  // useEffect(() => {
-  //     if (navigator.geolocation && !navigator.userAgent.includes('Mozilla')) {
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         const coordinates = position.coords.latitude + ',' + position.coords.longitude;
-  //         getCurrentLocation(coordinates)
-  //       })
-  //     } else {
-  //       // console.log("Geolocation is not supported by this browser.");
-  //     }
-  // }, [])
-
-
-  // function getCurrentLocation(coordinates) {
-  //   fetch(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_API_KEYACCU}&q=${coordinates}`)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data)
-  //     setLocation(data)
-  //   })
-  // }
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       fetch(`https://geocode.maps.co/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&namedetails=0&accept-language=nl&api_key=${process.env.REACT_APP_API_KEY}`)
@@ -71,7 +50,7 @@ export default function InputBar({ setCity, location, setLocation }) {
     <>
       <div className="search-container">
         <div className="search-inner">
-          <input value={inputvalue} autoComplete="off" onChange={showSuggestions} className="input" placeholder="Bv. Amsterdam"></input>
+          <input value={inputvalue} autoComplete="off" onChange={showSuggestions} className="input" placeholder="Zoek een plaats"></input>
           <div className="suggestions-container">
             {cities?.length > 0 ? (
               <div className="searchbar-suggestions">

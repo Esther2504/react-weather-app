@@ -13,13 +13,7 @@ const App = () => {
   const [city, setCity] = useState('Amsterdam');
   const [seeWeatherDetails, setSeeWeatherDetails] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [location, setLocation] = useState({
-    "Key":"249758",
-    "LocalizedName":"Amsterdam",
-    "Country":{
-       "LocalizedName":"Nederland"
-    }
- });
+  const [location, setLocation] = useState({"lat": 522136, "lon": 45400, "display_name": "Amsterdam"});
 
   const themeToggler = () => {
     let toggle = document.querySelector(".theme-toggle")
@@ -63,6 +57,7 @@ const App = () => {
       setWeather(data)
       console.log(data)
       setLoading(false)
+      seeWeatherDetails(false)
     })
     .catch((error) => {
       console.log(error)
@@ -144,11 +139,16 @@ max-width: 100%;
 }
 
 .input {
-width: 200px;
-box-sizing: border-box;
-border: 1px solid white;
-padding: 5px;
-border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.input:focus {
+  border: 1px solid white;
+  outline: transparent;
 }
 
 .suggestions-container {
@@ -235,15 +235,12 @@ const ErrorWrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 20rem;
-  height: 30rem;
-  margin: auto;
+  height: auto;
+  margin: 4rem auto;
   text-align: center;
   border-radius: 1rem;
   font-size: 1.1rem;
-
-  h2 {
-    margin-top: -2rem;
-  }
+  padding: 1.3rem;
 
   img {
     width: 20rem;
