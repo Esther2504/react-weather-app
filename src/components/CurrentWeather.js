@@ -104,9 +104,14 @@ h1 {
   top: 8rem;
   text-align: center;
   width: 100%;
+  position: static;
 
   img {
     margin: 1rem auto 0;
+  }
+
+  .arrow {
+  display: none;
   }
 }
 `

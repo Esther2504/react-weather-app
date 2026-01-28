@@ -101,12 +101,12 @@ const App = () => {
 // Styled components
 const Wrapper = styled.div`
 margin: 0 auto 1rem;
-max-width: 100%;
-overflow: hidden;
+max-width: 90%;
+// overflow: hidden;
 
 @media screen and (max-width: 680px) {
   width: 100%;
-  max-width: 100%;
+  max-width: 90%;
   }
 
   .theme-toggle {
@@ -121,7 +121,7 @@ overflow: hidden;
 const InputWrapper = styled.div`
 margin: 1rem auto;
 width: 16rem;
-max-width: 100%;
+max-width: 90%;
 
 .button {
   width: 4rem;
@@ -175,7 +175,7 @@ max-width: 100%;
 }
 
 @media screen and (max-width: 680px) {
-  max-width: 100%;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
 
@@ -189,23 +189,22 @@ const WeatherWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 48rem;
-  max-width: 100%;
+  max-width: 90%;
   height: 15rem;
   max-height: 100%;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   padding: 1.3rem;
   border-radius: 1.5rem 1.5rem 0 0;
-  max-width: 100%;
+  max-width: 90%;
   margin: 0 auto;
   position: relative;
 
   @media screen and (max-width: 680px) {
-  height: 23rem;
+  height: fit-content;
   width: 100%;
-  max-width: 100%;
-  margin-left: -1rem;
-  border-radius: 0;
+  max-width: 90%;
+  justify-content: center;
   }
 `;
 
@@ -218,15 +217,13 @@ const ForecastWrapper = styled.div`
   padding: 1.3rem;
   border-top: 1px solid white;
   border-radius: 0 0 1.5rem 1.5rem;
-  max-width: 100%;
+  max-width: 90%;
   margin: 0 auto;
 
 @media screen and (max-width: 680px) {
-  height: 30rem;
+  height: auto;
   width: 100%;
-  max-width: 100%;
-  border-radius: 0;
-  margin-left: -1rem;
+  max-width: 90%;
     }
 `;
 

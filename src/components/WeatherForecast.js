@@ -70,11 +70,12 @@ display: flex;
 margin-left: 0.5rem;
 margin-bottom: 0.5rem;
 width: 100%;
+justify-content: center;
 
 .flip-card {
   height: 9.5rem;
   width: 7.5rem;
-  margin: 0 0.9rem;
+  margin: 0.5rem;
 
   img {
     width: 3.5rem;
@@ -150,11 +151,8 @@ width: 100%;
 }
 
 @media screen and (max-width: 680px) {
-  display: grid;
-  grid-template-areas: 
-  ". . . ."
-  ". . . ."
-  ". . . ."; 
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
   margin-left: 0;
 
@@ -164,17 +162,14 @@ width: 100%;
     }
 
 @media screen and (max-width: 590px) {
-    display: grid;
-    grid-template-areas: 
-    ". ."
-    ". ."
-    ". ."; 
     align-items: center;
     max-width: 100%;
     margin: 0 auto;
+
       
     .flip-card-front, .flip-card-back, .flip-card-inner, .flip-card {
        max-width: 100%;
+       width: 100%;
      }
  }
 `
